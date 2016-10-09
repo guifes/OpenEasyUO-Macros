@@ -92,7 +92,8 @@ end
 local mining_messages = {
 	FAIL_TO_MINE = "You loosen some rocks but fail to find any useable ore.",
 	MINE_SUCCESS = "You dig some iron ore and put it in your backpack.",
-	NO_MORE_ORES = "There is no metal here to mine."
+	NO_MORE_ORES = "There is no metal here to mine.",
+	CANT_MINE_THERE = "You can't mine there."
 }
 
 function mineSpot(pickaxe, spot)
@@ -108,15 +109,15 @@ function mineSpot(pickaxe, spot)
 	UO.Macro(22, 0)
 	wait(2000)
 	
-	local messageFound = scanJournalFor(mining_messages.FAIL_TO_MINE, mining_messages.MINE_SUCCESS, mining_messages.NO_MORE_ORES)
-	local found_ore = messageFound ~= mining_messages.NO_MORE_ORES
+	local messageFound = scanJournalFor(mining_messages.FAIL_TO_MINE, mining_messages.MINE_SUCCESS, mining_messages.NO_MORE_ORES, mining_messages.CANT_MINE_THERE)
+	local found_ore = (messageFound ~= mining_messages.NO_MORE_ORES and messageFound ~= mining_messages.CANT_MINE_THERE)
 	if found_ore then
 		UO.SysMessage("Mined spot and found ore.", 79)
 	else
 		UO.SysMessage("Mined spot and did not find ore.", 27)
 	end
 	
-	return messageFound ~= mining_messages.NO_MORE_ORES
+	return found_ore
 end
 
 local lumberjacking_messages = {

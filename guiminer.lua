@@ -81,7 +81,6 @@ repeat
 			spotHasOre = mineSpot(tool, spot)
 			tool = checkForMiningTools()
 			maxWeightReached = checkWeight()
-			UO.SysMessage("spotHasOre: " .. tostring(spotHasOre) .. ", tool: " .. tostring(tool) .. ", maxWeightReached: " .. tostring(maxWeightReached), 47)
 		end
 		markSpot(spot)
 		spot = checkForSpots()
